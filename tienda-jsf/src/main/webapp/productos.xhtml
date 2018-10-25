@@ -1,0 +1,77 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui">
+
+        <h:body>
+
+            <ui:composition template="/plantillas/layout.xhtml">
+                <ui:define name="body">
+                    <h:form>
+                    <!-- <p:dataTable var="cliente" value="#{clienteBean.listaClientes}" style="font-size: 0.85em; text-align: center;">
+                        <p:column headerText="#{msjs.form_codigo}" >
+                            <h:outputText value="#{cliente.codigo}" />
+                        </p:column>
+                        <p:column headerText="#{msjs.form_nombre}" >
+                            <h:outputText value="#{cliente.nombre}" />
+                        </p:column>
+                        <p:column headerText="#{msjs.form_apellido}" >
+                            <h:outputText value="#{cliente.apellido}" />
+                        </p:column>
+                        <p:column headerText="#{msjs.form_genero}">
+                            <h:outputText value="#{cliente.genero}" />
+                        </p:column>
+                        <p:column headerText="#{msjs.form_profesion}">
+                            <h:outputText value="#{cliente.profesion}" />
+                        </p:column>
+                        <p:column headerText="#{msjs.form_numero}">
+                            <h:outputText value="#{cliente.numeroMovil}" />
+                        </p:column>
+                        <p:column headerText="#{msjs.form_publicidad}">
+                            <h:outputText value="#{cliente.publicidad}" />
+                        </p:column>
+                        <p:column headerText="#{msjs.form_correo}">
+                            <h:outputText value="#{cliente.correo}" />
+                        </p:column>
+                        <p:column headerText="#{msjs.form_modificar}">
+                            <h:commandLink action="#{clienteBean.modificar(cliente)}">
+                                <h:graphicImage name="icons/edit.png" width="20px" height="20px" />
+                            </h:commandLink>
+                        </p:column>
+                        <p:column headerText="#{msjs.form_eliminar}">
+                            
+                            <h:commandLink action="#{clienteBean.eliminar(cliente.codigo)}" 
+                                           onclick="if (!confirm('#{msjs.confirm_delete}')) return false">
+                                <h:graphicImage name="icons/delete.png" width="20px" height="20px" />
+                            </h:commandLink>
+                              
+                        </p:column>
+                    </p:dataTable> -->
+                    <ui:repeat var="productoSku" value="#{listaProductoBean.listaProductoSku}">
+			            <div class="col-md-6">
+			                <h2>#{productoSku.producto.nombre}</h2>
+			
+			                <ui:remove>
+			                    <p>#{productoSku.producto.descripcion}</p>
+			                </ui:remove>
+			                <h2>
+			                    <h:outputText value="#{productoSku.precio}">
+			                        <f:convertNumber type="number" pattern="#0.00" />
+			                    </h:outputText>
+			                </h2>
+			                <br />
+			                <span>Categoría: #{productoSku.producto.categoria.nombre}</span>
+			            </div>
+			        </ui:repeat>
+        
+                    </h:form>
+
+
+                </ui:define>
+            </ui:composition>
+        </h:body>
+</html>
