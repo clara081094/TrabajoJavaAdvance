@@ -15,15 +15,39 @@ and open the template in the editor.
             <ui:composition template="/plantillas/layout.xhtml">
                 <ui:define name="body">
                     
-                    <h:form>
-					    <p:multiSelectListbox value="#{multiSelectView.selection}" effect="slide" header="Categories" showHeaders="true">
-					        <f:selectItems value="#{multiSelectView.categories}" />
-					    </p:multiSelectListbox>
-					 
-					 
-					    <h:outputText id="out" value="Value: #{multiSelectView.selection}" style="display:block" />
-					</h:form>
+                <h:form>
+                    <p:panel id="panel" header="PRODUCTOS POR CATEGORIAS" style="margin-bottom:10px;">
+                        <p:messages id="messages" />
 
+                        <h:panelGrid columns="4" cellpadding="5">
+                            <h:outputLabel for="txt3" value="Categorias: " />
+                            <h:selectOneMenu id="txt3" value="#{multiSelect.categoriaId}" required="true" label="Text 3">
+                                <f:selectItem itemLabel="Select One" itemValue="" noSelectionOption="true" />
+                                <f:selectItems value="#{multiSelect.listaCategorias}" var="categoriaItem" 
+                                                itemLabel="#{categoriaItem.nombre}" itemValue="#{categoriaItem.id}" />
+                            </h:selectOneMenu>
+                            <p:message for="txt3" />
+                            
+                        <p:commandButton update="@(form)" value="Buscar" /> 
+                        </h:panelGrid>
+                       
+                    </p:panel>
+                    
+                     <p:dataTable var="producto" value="#{multiSelect.productos}"
+                                 rendered="#{multiSelect.productos != null and multiSelect.productos.size()>0  }" >
+                            <p:column headerText="Nombre">
+                                <h:outputText value="#{producto.nombre}" />
+                            </p:column>
+
+                            <p:column headerText="Descripcion">
+                                <h:outputText value="#{producto.descripcion}" />
+                            </p:column>
+
+                    </p:dataTable>
+                    
+                    
+                    
+                </h:form>
 
                 </ui:define>
             </ui:composition>

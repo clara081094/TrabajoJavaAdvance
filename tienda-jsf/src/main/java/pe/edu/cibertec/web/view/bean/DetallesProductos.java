@@ -7,14 +7,18 @@ import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
 import pe.edu.cibertec.spring.base.dominio.Categoria;
 import pe.edu.cibertec.spring.base.dominio.Producto;
+import pe.edu.cibertec.spring.base.dominio.ProductoSku;
 import pe.edu.cibertec.spring.base.service.CategoriaServicio;
 import pe.edu.cibertec.spring.base.service.ProductoServicio;
+import pe.edu.cibertec.spring.base.service.ProductoSkuServicio;
 
 @Component //@ManagedBean
 @Scope("view") //@ViewScoped
-public class MultiSelect {
+public class DetallesProductos {
   
     private String categoriaId;
+    private String productoId;
+    private ProductoSku productoSku;
     private List<Categoria> listaCategorias;
     private List<Producto> productos;
 
@@ -23,6 +27,9 @@ public class MultiSelect {
     
     @Autowired
     private ProductoServicio productoServicio;
+    
+    @Autowired
+    private ProductoSkuServicio productoSkuServicio;
     
     @PostConstruct
     public void init() {
@@ -49,6 +56,9 @@ public class MultiSelect {
         productos=productoServicio.listaPorCategoria(Integer.parseInt(categoriaId));
     }
 
+    public void obtenerProductoSku(){
+        setProductoSku(productoSkuServicio.detallesPorIdProducto(Integer.parseInt(productoId)));
+    }
     /**
      * @return the listaCategorias
      */
@@ -75,6 +85,36 @@ public class MultiSelect {
      */
     public void setProductos(List<Producto> productos) {
         this.productos = productos;
+    }
+
+    /**
+     * @return the productoId
+     */
+    public String getProductoId() {
+        return productoId;
+    }
+
+    /**
+     * @param productoId the productoId to set
+     */
+    public void setProductoId(String productoId) {
+        this.productoId = productoId;
+        if(productoId!=null)
+        obtenerProductoSku();
+    }
+
+    /**
+     * @return the productoSku
+     */
+    public ProductoSku getProductoSku() {
+        return productoSku;
+    }
+
+    /**
+     * @param productoSku the productoSku to set
+     */
+    public void setProductoSku(ProductoSku productoSku) {
+        this.productoSku = productoSku;
     }
      
     

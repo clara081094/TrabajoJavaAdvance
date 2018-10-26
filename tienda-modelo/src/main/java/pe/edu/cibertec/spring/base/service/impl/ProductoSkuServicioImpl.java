@@ -5,7 +5,6 @@ import java.util.List;
 
 import org.springframework.stereotype.Service;
 
-import pe.edu.cibertec.spring.base.dominio.Producto;
 import pe.edu.cibertec.spring.base.dominio.ProductoSku;
 import pe.edu.cibertec.spring.base.repository.ProductoSkuRepositorio;
 import pe.edu.cibertec.spring.base.service.ProductoSkuServicio;

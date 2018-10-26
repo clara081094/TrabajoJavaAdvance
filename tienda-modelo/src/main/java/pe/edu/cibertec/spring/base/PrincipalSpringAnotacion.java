@@ -6,6 +6,7 @@ import org.springframework.context.annotation.EnableAspectJAutoProxy;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
 import pe.edu.cibertec.spring.base.dominio.ProductoSku;
 import pe.edu.cibertec.spring.base.dominio.Usuario;
+import pe.edu.cibertec.spring.base.service.CategoriaServicio;
 import pe.edu.cibertec.spring.base.service.ProductoServicio;
 import pe.edu.cibertec.spring.base.service.ProductoSkuServicio;
 import pe.edu.cibertec.spring.base.service.UsuarioServicio;
@@ -23,6 +24,7 @@ public class PrincipalSpringAnotacion {
 
         	UsuarioServicio us = ctx.getBean(UsuarioServicio.class);
         	ProductoServicio sps = ctx.getBean(ProductoServicio.class);
+                CategoriaServicio cs= ctx.getBean(CategoriaServicio.class);
             ProductoSkuServicio pss = ctx.getBean(ProductoSkuServicio.class);
             ProductoSku ps = pss.obtenerPorId(4);
             System.out.printf("%d %d %s %d %s\n", ps.getId(),
@@ -55,8 +57,8 @@ public class PrincipalSpringAnotacion {
             
             System.out.println("Objeto: " + pss.listaDetallesPorCategoria(1).size());
             
-            for (int i=0; i<sps.listaPorCategoria(1).size(); i++) {
-            	System.out.println("Producto: "+ pss.listaDetallesPorCategoria(1).get(i).toString());
+            for (int i=0; i<cs.obtenerTodos().size(); i++) {
+            	System.out.println("Categoria: "+ cs.obtenerTodos().get(i).getNombre());
             }
             
         System.out.println("ObtenerTodos: "+pss.obtenerTodos().size());

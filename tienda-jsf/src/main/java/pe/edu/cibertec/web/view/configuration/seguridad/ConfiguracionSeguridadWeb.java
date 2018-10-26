@@ -26,10 +26,6 @@ import pe.edu.cibertec.spring.base.service.UsuarioServicio;
 @Configuration
 @EnableWebSecurity
 public class ConfiguracionSeguridadWeb extends WebSecurityConfigurerAdapter{
-    
-	
-	@Autowired
-    private UsuarioServicio usuarioServicio;
 	
     @Override
     protected void configure(HttpSecurity http) throws Exception{

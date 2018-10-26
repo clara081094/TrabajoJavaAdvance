@@ -1,32 +1,73 @@
-<?xml version='1.0' encoding='UTF-8' ?>
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+To change this template, choose Tools | Templates
+and open the template in the editor.
+-->
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml"
-      xmlns:h="http://xmlns.jcp.org/jsf/html"
-      xmlns:f="http://xmlns.jcp.org/jsf/core"
-      xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
-    <f:metadata>
-        <f:viewParam name="id" value="#{productoDetalleBean.idProducto}"
-            required="true" />
-    </f:metadata>
-    <h:head>
-        <title>Mi tienda de productos</title>
-        
-    </h:head>
-    <h:body>
-            <div>
-                <h2>#{productoSku.producto.nombre}</h2>
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui">
 
-                <ui:remove>
-                    <p>#{productoSku.producto.descripcion}</p>
-                </ui:remove>
-                <h2>
-                    <h:outputText value="#{productoSku.precio}">
-                        <f:convertNumber type="number" pattern="#0.00" />
-                    </h:outputText>
-                </h2>
-                <br />
-                <span>Categoría: #{productoSku.producto.categoria.nombre}</span>
-            </div>
-        </ui:repeat>
-    </h:body>
-</html>
+        <h:body>
+
+            <ui:composition template="/plantillas/layout.xhtml">
+                <ui:define name="body">
+                    <p:panel id="panel" header="DETALLES DE PRODUCTO" style="margin-bottom:10px;">
+                <h:form id="form1">
+                    
+                        <p:messages id="messages" />
+
+                        <h:panelGrid columns="4" cellpadding="5">
+                            <h:outputLabel for="txt4" value="Categorias: " />
+                            <h:selectOneMenu id="txt4" value="#{detallesProductos.categoriaId}" required="true" label="Text 3">
+                                <f:selectItem itemLabel="Select One" itemValue="" noSelectionOption="true" />
+                                <f:selectItems value="#{detallesProductos.listaCategorias}" var="categoriaItem" 
+                                                itemLabel="#{categoriaItem.nombre}" itemValue="#{categoriaItem.id}" />
+                            </h:selectOneMenu>
+                            <p:message for="txt4" />
+                            
+                        <p:commandButton update="@(form)" value="Buscar" /> 
+                        </h:panelGrid>
+                  </h:form>      
+                  <h:form>
+                        <h:panelGrid columns="4" cellpadding="5">
+                            <h:outputLabel for="txt5" value="Productos: " />
+                            <h:selectOneMenu id="txt5" value="#{detallesProductos.productoId}" required="false" >
+                                <f:selectItem itemLabel="Select One" itemValue="" noSelectionOption="true" />
+                                <f:selectItems value="#{detallesProductos.productos}" var="productoItem" 
+                                                itemLabel="#{productoItem.nombre}" itemValue="#{productoItem.id}" />
+                            </h:selectOneMenu>
+                            
+                        <p:commandButton update="@(form)" value="Buscar Producto" /> 
+                        </h:panelGrid>
+                       
+                    
+                    
+                     <p:dataTable var="productoSku" value="#{detallesProductos.productoSku}"
+                                 rendered="#{detallesProductos.productoSku != null}" >
+                         
+                         <p:column headerText="Nombre">
+                                <h:outputText value="#{productoSku.producto.nombre}" />
+                            </p:column>
+                         
+                         <p:column headerText="Precio">
+                                <h:outputText value="#{productoSku.precio}" />
+                            </p:column>
+
+                            <p:column headerText="Cantidad">
+                                <h:outputText value="#{productoSku.cantidad}" />
+                            </p:column>
+
+                    </p:dataTable>
+                    
+                    
+                    
+                </h:form>
+                        </p:panel>
+                </ui:define>
+            </ui:composition>
+        </h:body>
+        
+  </html>
